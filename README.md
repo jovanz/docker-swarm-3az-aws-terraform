@@ -49,3 +49,5 @@ To verify that docker swarm is up and running just connect to manager node and r
 ```bash
     docker node ls
 ```
+Ansible playbook for deploying swarm is used from:
+[GitHub](https://github.com/nextrevision/ansible-swarm-playbook)
