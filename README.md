@@ -1,6 +1,8 @@
 # docker-swarm-3az-aws-terraform
 Infrastructure as Code which create docker swarm cluster with three managers and workers in three availability zones on AWS.
 
+![rsz_docker-swarm-3az](https://user-images.githubusercontent.com/7665799/129252435-9204be6e-1504-4ee6-9a6c-1887040d1d8b.png)
+
 ## Prerequest
 
 Use environment variables to provide configuration options and credentials.
