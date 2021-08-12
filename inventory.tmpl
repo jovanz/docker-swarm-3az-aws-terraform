@@ -1,0 +1,19 @@
+[masters]
+${master1-dns} ansible_host=${master1-ip} # ${master1-id}
+${master2-dns} ansible_host=${master2-ip} # ${master2-id}
+${master3-dns} ansible_host=${master3-ip} # ${master3-id}
+
+[workers]
+${worker1-dns} ansible_host=${worker1-ip} # ${worker1-id}
+${worker2-dns} ansible_host=${worker2-ip} # ${worker2-id}
+${worker3-dns} ansible_host=${worker3-ip} # ${worker3-id}
+
+[masters_priv]
+${master1-priv-ip}
+${master2-priv-ip}
+${master3-priv-ip}
+
+[workers_priv]
+${worker1-priv-ip}
+${worker2-priv-ip}
+${worker3-priv-ip}

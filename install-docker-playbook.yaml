@@ -1,0 +1,46 @@
+#################################################
+# Playbooks: Docker Install
+#################################################
+---
+- hosts: masters,workers
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop:
+        ["git", "apt-transport-https", "ca-certificates", "curl", "nfs-common"]
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Ensures /etc/docker dir exists
+      file:
+        path: /etc/docker
+        state: directory
+        mode: 0755
+
+    - name: Copy Docker deamon json config file
+      copy:
+        src: "{{ playbook_dir }}/daemon.json"
+        dest: "/etc/docker/daemon.json"
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+      # sudo usermod -aG docker root
+    - name: Add remote ubuntu user to docker group
+      user:
+        name: ubuntu
+        append: yes
+        groups: docker
