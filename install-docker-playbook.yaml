@@ -2,7 +2,7 @@
 # Playbooks: Docker Install
 #################################################
 ---
-- hosts: masters,workers
+- hosts: managers,workers
   remote_user: ubuntu
   become: true
   tasks:
@@ -12,7 +12,11 @@
     - name: Install required system packages
       apt: name={{ item }} state=latest update_cache=yes
       loop:
-        ["git", "apt-transport-https", "ca-certificates", "curl", "nfs-common"]
+        ["git", "apt-transport-https", "ca-certificates", "curl"]
+
+    - name: Set timezone to Europe/Belgrade
+      community.general.timezone:
+        name: Europe/Belgrade
 
     - name: Add Docker GPG apt Key
       apt_key:

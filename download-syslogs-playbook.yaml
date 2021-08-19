@@ -1,0 +1,19 @@
+#################################################
+# Playbooks: Download syslogs
+#################################################
+---
+- hosts: managers,workers
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Copy syslog file to tmp folder
+      ansible.builtin.copy:
+        src: /var/log/syslog
+        dest: /tmp/syslog-{{ ansible_hostname }}
+        remote_src: yes
+
+    - name: Fetch syslog file from remote site to local
+      ansible.builtin.fetch:
+        src: /tmp/syslog-{{ ansible_hostname }}
+        dest: syslog-{{ inventory_hostname }}-{{ ansible_date_time.date }}.log
+        flat: yes

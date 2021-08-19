@@ -20,7 +20,12 @@ variable "ami" {
   default     = "ami-0b1deee75235aa4bb"
 }
 
-variable "instance_type" {
+variable "manager_instance_type" {
+  description = "Instance type"
+  default     = "t2.micro"
+}
+
+variable "worker_instance_type" {
   description = "Instance type"
   default     = "t2.micro"
 }

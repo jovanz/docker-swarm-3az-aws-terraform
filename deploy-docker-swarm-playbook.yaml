@@ -6,7 +6,7 @@
 # into two groups:
 #   - swarm_manager_operational (swarm is running and active)
 #   - swarm_manager_bootstrap (host needs to be joined to the cluster)
-- hosts: masters
+- hosts: managers
   become: true
   tasks:
     - name: determine swarm status

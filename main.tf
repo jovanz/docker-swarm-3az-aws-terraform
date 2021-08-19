@@ -124,45 +124,45 @@ resource "aws_key_pair" "default" {
   public_key = file("${var.key_path}")
 }
 
-resource "aws_instance" "master1" {
+resource "aws_instance" "manager1" {
   ami                    = var.ami
-  instance_type          = var.instance_type
+  instance_type          = var.manager_instance_type
   key_name               = aws_key_pair.default.id
   subnet_id              = aws_subnet.main.0.id
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
 
   tags = {
-    Name = "master 1"
+    Name = "manager 1"
   }
 }
 
-resource "aws_instance" "master2" {
+resource "aws_instance" "manager2" {
   ami                    = var.ami
-  instance_type          = var.instance_type
+  instance_type          = var.manager_instance_type
   key_name               = aws_key_pair.default.id
   subnet_id              = aws_subnet.main.1.id
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
 
   tags = {
-    Name = "master 2"
+    Name = "manager 2"
   }
 }
 
-resource "aws_instance" "master3" {
+resource "aws_instance" "manager3" {
   ami                    = var.ami
-  instance_type          = var.instance_type
+  instance_type          = var.manager_instance_type
   key_name               = aws_key_pair.default.id
   subnet_id              = aws_subnet.main.2.id
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
 
   tags = {
-    Name = "master 3"
+    Name = "manager 3"
   }
 }
 
 resource "aws_instance" "worker1" {
   ami                    = var.ami
-  instance_type          = var.instance_type
+  instance_type          = var.worker_instance_type
   key_name               = aws_key_pair.default.id
   subnet_id              = aws_subnet.main.0.id
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
@@ -174,7 +174,7 @@ resource "aws_instance" "worker1" {
 
 resource "aws_instance" "worker2" {
   ami                    = var.ami
-  instance_type          = var.instance_type
+  instance_type          = var.worker_instance_type
   key_name               = aws_key_pair.default.id
   subnet_id              = aws_subnet.main.1.id
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
@@ -186,7 +186,7 @@ resource "aws_instance" "worker2" {
 
 resource "aws_instance" "worker3" {
   ami                    = var.ami
-  instance_type          = var.instance_type
+  instance_type          = var.worker_instance_type
   key_name               = aws_key_pair.default.id
   subnet_id              = aws_subnet.main.2.id
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
@@ -200,30 +200,30 @@ resource "aws_instance" "worker3" {
 resource "local_file" "AnsibleInventory" {
   content = templatefile("inventory.tmpl",
     {
-      master1-dns     = aws_instance.master1.public_dns,
-      master1-ip      = aws_instance.master1.public_ip,
-      master1-priv-ip = aws_instance.master1.private_ip,
-      master1-id      = aws_instance.master1.id,
-      master2-dns     = aws_instance.master2.public_dns,
-      master2-ip      = aws_instance.master2.public_ip,
-      master2-priv-ip = aws_instance.master2.private_ip,
-      master2-id      = aws_instance.master2.id,
-      master3-dns     = aws_instance.master3.public_dns,
-      master3-ip      = aws_instance.master3.public_ip,
-      master3-priv-ip = aws_instance.master3.private_ip,
-      master3-id      = aws_instance.master3.id,
-      worker1-dns     = aws_instance.worker1.public_dns,
-      worker1-ip      = aws_instance.worker1.public_ip,
-      worker1-priv-ip = aws_instance.worker1.private_ip,
-      worker1-id      = aws_instance.worker1.id,
-      worker2-dns     = aws_instance.worker2.public_dns,
-      worker2-ip      = aws_instance.worker2.public_ip,
-      worker2-priv-ip = aws_instance.worker2.private_ip,
-      worker2-id      = aws_instance.worker2.id
-      worker3-dns     = aws_instance.worker3.public_dns,
-      worker3-ip      = aws_instance.worker3.public_ip,
-      worker3-priv-ip = aws_instance.worker3.private_ip,
-      worker3-id      = aws_instance.worker3.id
+      manager1-dns     = aws_instance.manager1.public_dns,
+      manager1-ip      = aws_instance.manager1.public_ip,
+      manager1-priv-ip = aws_instance.manager1.private_ip,
+      manager1-id      = aws_instance.manager1.id,
+      manager2-dns     = aws_instance.manager2.public_dns,
+      manager2-ip      = aws_instance.manager2.public_ip,
+      manager2-priv-ip = aws_instance.manager2.private_ip,
+      manager2-id      = aws_instance.manager2.id,
+      manager3-dns     = aws_instance.manager3.public_dns,
+      manager3-ip      = aws_instance.manager3.public_ip,
+      manager3-priv-ip = aws_instance.manager3.private_ip,
+      manager3-id      = aws_instance.manager3.id,
+      worker1-dns      = aws_instance.worker1.public_dns,
+      worker1-ip       = aws_instance.worker1.public_ip,
+      worker1-priv-ip  = aws_instance.worker1.private_ip,
+      worker1-id       = aws_instance.worker1.id,
+      worker2-dns      = aws_instance.worker2.public_dns,
+      worker2-ip       = aws_instance.worker2.public_ip,
+      worker2-priv-ip  = aws_instance.worker2.private_ip,
+      worker2-id       = aws_instance.worker2.id
+      worker3-dns      = aws_instance.worker3.public_dns,
+      worker3-ip       = aws_instance.worker3.public_ip,
+      worker3-priv-ip  = aws_instance.worker3.private_ip,
+      worker3-id       = aws_instance.worker3.id
     }
   )
   filename = "inventory"

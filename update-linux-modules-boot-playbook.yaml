@@ -1,0 +1,18 @@
+#################################################
+# Playbooks: Load kernel modules
+#################################################
+---
+- hosts: managers,workers
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Copy kernel modules config file to /etc/modules-load.d
+      copy:
+        src: "{{ playbook_dir }}/ip-virtual-server.conf"
+        dest: "/etc/modules-load.d/ip-virtual-server.conf"
+
+    - name: Restart service systemd-modules-load, in all cases
+      ansible.builtin.systemd:
+        name: systemd-modules-load.service
+        daemon_reload: yes
+        state: restarted

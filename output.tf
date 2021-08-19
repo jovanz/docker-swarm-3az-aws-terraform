@@ -4,17 +4,17 @@
 output "subnet_ids" {
   value = aws_subnet.main.*.id
 }
-output "master1_public_ip" {
-  description = "Public IP address of the master"
-  value       = ["${aws_instance.master1.public_ip}"]
+output "manager1_public_ip" {
+  description = "Public IP address of the manager"
+  value       = ["${aws_instance.manager1.public_ip}"]
 }
-output "master2_public_ip" {
-  description = "Public IP address of the master"
-  value       = ["${aws_instance.master2.public_ip}"]
+output "manager2_public_ip" {
+  description = "Public IP address of the manager"
+  value       = ["${aws_instance.manager2.public_ip}"]
 }
-output "master3_public_ip" {
-  description = "Public IP address of the master"
-  value       = ["${aws_instance.master3.public_ip}"]
+output "manager3_public_ip" {
+  description = "Public IP address of the manager"
+  value       = ["${aws_instance.manager3.public_ip}"]
 }
 output "worker1_public_ip" {
   description = "Public IP address of the worker1"

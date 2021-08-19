@@ -1,17 +1,17 @@
-[masters]
-${master1-dns} ansible_host=${master1-ip} # ${master1-id}
-${master2-dns} ansible_host=${master2-ip} # ${master2-id}
-${master3-dns} ansible_host=${master3-ip} # ${master3-id}
+[managers]
+swarm-manager-1 ansible_hostname=${manager1-dns} ansible_host=${manager1-ip} # ${manager1-id}
+swarm-manager-2 ansible_hostname=${manager2-dns} ansible_host=${manager2-ip} # ${manager2-id}
+swarm-manager-3 ansible_hostname=${manager3-dns} ansible_host=${manager3-ip} # ${manager3-id}
 
 [workers]
-${worker1-dns} ansible_host=${worker1-ip} # ${worker1-id}
-${worker2-dns} ansible_host=${worker2-ip} # ${worker2-id}
-${worker3-dns} ansible_host=${worker3-ip} # ${worker3-id}
+swarm-worker-1 ansible_hostname=${worker1-dns} ansible_host=${worker1-ip} # ${worker1-id}
+swarm-worker-2 ansible_hostname=${worker2-dns} ansible_host=${worker2-ip} # ${worker2-id}
+swarm-worker-3 ansible_hostname=${worker3-dns} ansible_host=${worker3-ip} # ${worker3-id}
 
-[masters_priv]
-${master1-priv-ip}
-${master2-priv-ip}
-${master3-priv-ip}
+[managers_priv]
+${manager1-priv-ip}
+${manager2-priv-ip}
+${manager3-priv-ip}
 
 [workers_priv]
 ${worker1-priv-ip}
